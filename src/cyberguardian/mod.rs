@@ -9,3 +9,4 @@ pub mod threat_predictor;
 pub mod vpn_circuits;
 pub mod decentralized_network;
 pub mod response_engine;
+pub mod atm_compliance;
