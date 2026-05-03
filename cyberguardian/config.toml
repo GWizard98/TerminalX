@@ -43,8 +43,14 @@ allowed_destinations = [
 ]
 alert_ports = [4444, 1337, 8080, 31337, 6666, 9999]
 
+[monitors.integrity]
+enabled = true
+watch_paths = ["/root/TradeEco"]
+ignore_extensions = ["log"]
+poll_interval_secs = 60
+
 [notifycore]
-bot_token = "your-actual-bot-token"
+bot_token = "8667300067:AAGwnBSYoa9j7Ts1JINRWj07bAfwPWsbjcQ"
 chat_id = "8691529662"
 min_severity = "warning"
 

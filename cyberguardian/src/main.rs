@@ -11,7 +11,7 @@ use tracing::info;
 
 use cyberguardian::{
     config::Config,
-    monitors::{ssh, filesystem, process, network},
+    monitors::{ssh, filesystem, process, network, integrity},
     notifycore::NotifyCore,
 };
 
@@ -100,6 +100,16 @@ async fn main() -> Result<()> {
     tokio::spawn(async move {
         if let Err(e) = network::run(net_cfg, nc, sn, poll_secs).await {
             tracing::error!("Network monitor crashed: {}", e);
+        }
+    });
+
+    // Integrity monitor
+    let nc = Arc::clone(&notifycore);
+    let integrity_cfg = config.monitors.integrity.clone();
+    let sn = server_name.clone();
+    tokio::spawn(async move {
+        if let Err(e) = integrity::run(integrity_cfg, nc, sn).await {
+            tracing::error!("Integrity monitor crashed: {}", e);
         }
     });
 

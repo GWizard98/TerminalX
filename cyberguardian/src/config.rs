@@ -29,6 +29,7 @@ pub struct MonitorConfig {
     pub filesystem: FilesystemMonitorConfig,
     pub process: ProcessMonitorConfig,
     pub network: NetworkMonitorConfig,
+    pub integrity: IntegrityMonitorConfig,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -72,6 +73,14 @@ pub struct NotifyCoreConfig {
     pub min_severity: String,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct IntegrityMonitorConfig {
+    pub enabled: bool,
+    pub watch_paths: Vec<PathBuf>,
+    pub ignore_extensions: Vec<String>,
+    pub poll_interval_secs: u64,
+}
+
 impl Config {
     /// Creates a new [`Config`].
     pub fn new(agent: AgentConfig, monitors: MonitorConfig, notifycore: NotifyCoreConfig, vpn: crate::vpn::manager::VpnConfig) -> Self {
@@ -91,42 +100,50 @@ impl Config {
                 server_name: "tradeco-droplet".to_string(),
                 poll_interval_secs: 30,
             },
-            monitors: MonitorConfig {
-                ssh: SshMonitorConfig {
-                    enabled: true,
-                    auth_log_path: PathBuf::from("/var/log/auth.log"),
-                    fail_threshold: 5,
-                },
-                filesystem: FilesystemMonitorConfig {
-                    enabled: true,
-                    watch_paths: vec![
-                        PathBuf::from("/root/TradeEco"),
-                        PathBuf::from("/etc/cyberguardian"),
-                    ],
-                    ignore_extensions: vec!["log".to_string()],
-                },
-                process: ProcessMonitorConfig {
-                    enabled: true,
-                    whitelist: vec![
-                        "hq".to_string(),
-                        "cyberguardian".to_string(),
-                        "sshd".to_string(),
-                        "systemd".to_string(),
-                        "journald".to_string(),
-                        "ntpd".to_string(),
-                        "cron".to_string(),
-                    ],
-                },
-                network: NetworkMonitorConfig {
-                    enabled: true,
-                    allowed_destinations: vec![
-                        "api-fxtrade.oanda.com".to_string(),
-                        "stream-fxtrade.oanda.com".to_string(),
-                        "ntfy.sh".to_string(),
-                    ],
-                    alert_ports: vec![4444, 1337, 8080, 31337],
-                },
+        monitors: MonitorConfig {
+            ssh: SshMonitorConfig {
+                enabled: true,
+                auth_log_path: PathBuf::from("/var/log/auth.log"),
+                fail_threshold: 5,
+        },
+        filesystem: FilesystemMonitorConfig {
+            enabled: true,
+            watch_paths: vec![
+                PathBuf::from("/root/TradeEco"),
+                PathBuf::from("/etc/cyberguardian"),
+            ],
+            ignore_extensions: vec!["log".to_string()],
+        },
+            process: ProcessMonitorConfig {
+                enabled: true,
+                whitelist: vec![
+                    "hq".to_string(),
+                    "cyberguardian".to_string(),
+                    "sshd".to_string(),
+                    "systemd".to_string(),
+                    "journald".to_string(),
+                    "ntpd".to_string(),
+                    "cron".to_string(),
+                ],
             },
+            network: NetworkMonitorConfig {
+                enabled: true,
+                allowed_destinations: vec![
+                    "api-fxtrade.oanda.com".to_string(),
+                    "stream-fxtrade.oanda.com".to_string(),
+                    "ntfy.sh".to_string(),
+                ],
+                alert_ports: vec![4444, 1337, 8080, 31337],
+            },
+            integrity: IntegrityMonitorConfig {
+                enabled: true,
+                watch_paths: vec![
+                     PathBuf::from("/root/TradeEco"),
+                ],
+                ignore_extensions: vec!["log".to_string()],
+        poll_interval_secs: 60,
+    },
+},
             notifycore: NotifyCoreConfig {
                  bot_token: "your-bot-token".to_string(),
                  chat_id: "8691529662".to_string(),

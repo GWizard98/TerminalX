@@ -12,6 +12,7 @@ path = "src/main.rs"
 [dependencies]
 # Async runtime
 tokio = { version = "1", features = ["full"] }
+walkdir = "2"
 
 # Serialization
 serde = { version = "1", features = ["derive"] }
