@@ -13,6 +13,7 @@ pub struct Config {
     pub monitors: MonitorConfig,
     pub notifycore: NotifyCoreConfig,
     pub vpn: crate::vpn::manager::VpnConfig,
+    pub active_response: ActiveResponseConfig,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -81,11 +82,19 @@ pub struct IntegrityMonitorConfig {
     pub poll_interval_secs: u64,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+pub struct ActiveResponseConfig {
+    pub enabled: bool,
+    pub auto_block_threshold: f64,
+    pub escalate_threshold: f64,
+    pub ip_whitelist: Vec<String>,
+    pub known_abuse_asns: Vec<String>,
+    pub bulletproof_keywords: Vec<String>,
+    pub evidence_log_path: String,
+}
+
 impl Config {
     /// Creates a new [`Config`].
-    pub fn new(agent: AgentConfig, monitors: MonitorConfig, notifycore: NotifyCoreConfig, vpn: crate::vpn::manager::VpnConfig) -> Self {
-        Self { agent, monitors, notifycore, vpn }
-    }
     
     pub fn load(path: &PathBuf) -> Result<Self> {
         let content = std::fs::read_to_string(path)?;
@@ -132,7 +141,7 @@ impl Config {
                     "api-fxtrade.oanda.com".to_string(),
                     "stream-fxtrade.oanda.com".to_string(),
                     "ntfy.sh".to_string(),
-                ],
+            ],
                 alert_ports: vec![4444, 1337, 8080, 31337],
             },
             integrity: IntegrityMonitorConfig {
@@ -145,11 +154,12 @@ impl Config {
     },
 },
             notifycore: NotifyCoreConfig {
-                 bot_token: "your-bot-token".to_string(),
-                 chat_id: "8691529662".to_string(),
-                 min_severity: "warning".to_string(),
+                bot_token: "your-bot-token".to_string(),
+                chat_id: "8691529662".to_string(),
+                min_severity: "warning".to_string(),
             },
             vpn: crate::vpn::manager::VpnConfig::default(),
+            active_response: ActiveResponseConfig::default(),
         }
     }
 }

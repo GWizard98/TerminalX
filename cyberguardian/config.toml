@@ -69,3 +69,12 @@ address = ""
 location = ""
 jurisdiction = ""
 trust_score = 0.0
+
+[active_response]
+enabled = true
+auto_block_threshold = 0.80
+escalate_threshold = 1.00
+ip_whitelist = ["172.58.135.186"]
+known_abuse_asns = ["AS51396", "AS47890"]
+bulletproof_keywords = ["UNMANAGED", "bulletproof", "offshore"]
+evidence_log_path = "/var/log/cyberguardian/evidence.jsonl"

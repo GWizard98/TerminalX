@@ -1,60 +1,16 @@
-   0.550751709s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint: stale: changed "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/monitors/integrity.rs"
-   0.550902459s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:           (vs) "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/target/debug/.fingerprint/cyberguardian-974c162d20fb093c/dep-lib-cyberguardian"
-   0.550905959s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1777785229, nanos: 946670770 } < FileTime { seconds: 1777785442, nanos: 327680605 }
-   0.551635834s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint: fingerprint dirty for cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian)/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("cyberguardian", ["lib"], "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/lib.rs", Edition2021) }
-   0.551727500s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/target/debug/.fingerprint/cyberguardian-974c162d20fb093c/dep-lib-cyberguardian", reference_mtime: FileTime { seconds: 1777785229, nanos: 946670770 }, stale: "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/monitors/integrity.rs", stale_mtime: FileTime { seconds: 1777785442, nanos: 327680605 } }))
-   0.595697292s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint: stale: changed "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/monitors/integrity.rs"
-   0.595705125s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:           (vs) "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/target/debug/.fingerprint/cyberguardian-845e855bd3fef133/dep-test-lib-cyberguardian"
-   0.595709417s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1777785229, nanos: 946526812 } < FileTime { seconds: 1777785442, nanos: 327680605 }
-   0.596369209s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint: fingerprint dirty for cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian)/Check { test: true }/TargetInner { name_inferred: true, ..: lib_target("cyberguardian", ["lib"], "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/lib.rs", Edition2021) }
-   0.596388792s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/target/debug/.fingerprint/cyberguardian-845e855bd3fef133/dep-test-lib-cyberguardian", reference_mtime: FileTime { seconds: 1777785229, nanos: 946526812 }, stale: "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/monitors/integrity.rs", stale_mtime: FileTime { seconds: 1777785442, nanos: 327680605 } }))
-   0.597750334s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint: fingerprint error for cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian)/Check { test: false }/TargetInner { name: "cyberguardian", doc: true, ..: with_path("/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/main.rs", Edition2021) }
-   0.597755917s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/akoyegordon/GorTech/TerminalX/cyberguardian/target/debug/.fingerprint/cyberguardian-b82b61e64fe37d42/bin-cyberguardian`
-
-Caused by:
-    No such file or directory (os error 2)
-
-Stack backtrace:
-   0: std::backtrace::Backtrace::create
-   1: cargo_util::paths::read_bytes
-   2: cargo_util::paths::read
-   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
-   4: cargo::core::compiler::fingerprint::prepare_target
-   5: cargo::core::compiler::compile
-   6: <cargo::core::compiler::build_runner::BuildRunner>::compile
-   7: cargo::ops::cargo_compile::compile_ws
-   8: cargo::ops::cargo_compile::compile_with_exec
-   9: cargo::ops::cargo_compile::compile
-  10: cargo::commands::check::exec
-  11: <cargo::cli::Exec>::exec
-  12: cargo::main
-  13: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
-  14: std::rt::lang_start::<()>::{closure#0}
-  15: std::rt::lang_start_internal
-  16: _main
-   0.615894792s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint: fingerprint error for cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian)/Check { test: true }/TargetInner { name: "cyberguardian", doc: true, ..: with_path("/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/main.rs", Edition2021) }
-   0.615907125s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/akoyegordon/GorTech/TerminalX/cyberguardian/target/debug/.fingerprint/cyberguardian-406df65edadb71c1/test-bin-cyberguardian`
-
-Caused by:
-    No such file or directory (os error 2)
-
-Stack backtrace:
-   0: std::backtrace::Backtrace::create
-   1: cargo_util::paths::read_bytes
-   2: cargo_util::paths::read
-   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
-   4: cargo::core::compiler::fingerprint::prepare_target
-   5: cargo::core::compiler::compile
-   6: <cargo::core::compiler::build_runner::BuildRunner>::compile
-   7: cargo::ops::cargo_compile::compile_ws
-   8: cargo::ops::cargo_compile::compile_with_exec
-   9: cargo::ops::cargo_compile::compile
-  10: cargo::commands::check::exec
-  11: <cargo::cli::Exec>::exec
-  12: cargo::main
-  13: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
-  14: std::rt::lang_start::<()>::{closure#0}
-  15: std::rt::lang_start_internal
-  16: _main
+   0.101648750s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint: stale: changed "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/response/mod.rs"
+   0.101657792s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:           (vs) "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/target/debug/.fingerprint/cyberguardian-974c162d20fb093c/dep-lib-cyberguardian"
+   0.101664750s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1777792054, nanos: 608012126 } < FileTime { seconds: 1777793442, nanos: 934725406 }
+   0.101801042s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint: fingerprint dirty for cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian)/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("cyberguardian", ["lib"], "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/lib.rs", Edition2021) }
+   0.101811417s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/target/debug/.fingerprint/cyberguardian-974c162d20fb093c/dep-lib-cyberguardian", reference_mtime: FileTime { seconds: 1777792054, nanos: 608012126 }, stale: "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/response/mod.rs", stale_mtime: FileTime { seconds: 1777793442, nanos: 934725406 } }))
+   0.111919000s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint: stale: changed "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/response/mod.rs"
+   0.111927417s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:           (vs) "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/target/debug/.fingerprint/cyberguardian-845e855bd3fef133/dep-test-lib-cyberguardian"
+   0.111929417s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1777792054, nanos: 607938210 } < FileTime { seconds: 1777793442, nanos: 934725406 }
+   0.112000458s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint: fingerprint dirty for cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian)/Check { test: true }/TargetInner { name_inferred: true, ..: lib_target("cyberguardian", ["lib"], "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/lib.rs", Edition2021) }
+   0.112009333s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/target/debug/.fingerprint/cyberguardian-845e855bd3fef133/dep-test-lib-cyberguardian", reference_mtime: FileTime { seconds: 1777792054, nanos: 607938210 }, stale: "/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/response/mod.rs", stale_mtime: FileTime { seconds: 1777793442, nanos: 934725406 } }))
+   0.112634208s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint: fingerprint dirty for cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian)/Check { test: false }/TargetInner { name: "cyberguardian", doc: true, ..: with_path("/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/main.rs", Edition2021) }
+   0.112638958s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleDepFingerprint { name: "cyberguardian" })
+   0.113206167s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint: fingerprint dirty for cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian)/Check { test: true }/TargetInner { name: "cyberguardian", doc: true, ..: with_path("/Users/akoyegordon/GorTech/TerminalX/cyberguardian/src/main.rs", Edition2021) }
+   0.113214167s  INFO prepare_target{force=false package_id=cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian) target="cyberguardian"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleDepFingerprint { name: "cyberguardian" })
     Checking cyberguardian v0.1.0 (/Users/akoyegordon/GorTech/TerminalX/cyberguardian)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.99s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.04s

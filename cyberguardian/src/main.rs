@@ -13,16 +13,14 @@ use cyberguardian::{
     config::Config,
     monitors::{ssh, filesystem, process, network, integrity},
     notifycore::NotifyCore,
+    response::ActiveResponse,
 };
 
 #[derive(Parser, Debug)]
 #[command(name = "cyberguardian", about = "TerminalX CyberGuardian — server monitoring agent")]
 struct Cli {
-    /// Path to config file
     #[arg(short, long, default_value = "/etc/cyberguardian/config.toml")]
     config: PathBuf,
-
-    /// Print example config and exit
     #[arg(long)]
     print_config: bool,
 }
@@ -38,7 +36,6 @@ async fn main() -> Result<()> {
 
     let cli = Cli::parse();
 
-    // Print example config and exit
     if cli.print_config {
         let example = Config::default_example();
         println!("{}", toml::to_string_pretty(&example)?);
@@ -54,7 +51,6 @@ async fn main() -> Result<()> {
 
     info!("Agent: {} | Poll interval: {}s", server_name, poll_secs);
 
-    // Shared NotifyCore instance
     let notifycore = Arc::new(NotifyCore::new(
         config.notifycore.bot_token.clone(),
         config.notifycore.chat_id.clone(),
@@ -115,7 +111,14 @@ async fn main() -> Result<()> {
 
     info!("All monitors running. CyberGuardian is live.");
 
-    // Keep main alive
+    // Active Response engine
+    let _active_response = ActiveResponse::new(
+        config.active_response.clone(),
+        Arc::clone(&notifycore),
+        server_name.clone(),
+    );
+    info!("Active Response engine initialized");
+
     tokio::signal::ctrl_c().await?;
     info!("Shutting down CyberGuardian.");
     Ok(())
