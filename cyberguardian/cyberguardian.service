@@ -1,0 +1,26 @@
+[Unit]
+Description=CyberGuardian — TerminalX server monitoring agent
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=cyberguardian
+Group=cyberguardian
+ExecStart=/usr/local/bin/cyberguardian --config /etc/cyberguardian/config.toml
+Restart=always
+RestartSec=10
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/var/log
+PrivateTmp=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=cyberguardian
+
+[Install]
+WantedBy=multi-user.target

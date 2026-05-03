@@ -1,0 +1,65 @@
+[agent]
+server_name = "tradeco-droplet"
+poll_interval_secs = 30
+
+[monitors.ssh]
+enabled = true
+auth_log_path = "/var/log/auth.log"
+fail_threshold = 5
+
+[monitors.filesystem]
+enabled = true
+watch_paths = [
+    "/root/TradeEco",
+    "/etc/cyberguardian",
+]
+ignore_extensions = ["log"]
+
+[monitors.process]
+enabled = true
+whitelist = [
+    "hq", "cyberguardian", "sshd", "systemd", "systemd-journal",
+    "journald", "journalctl", "ntpd", "chronyd", "cron", "bash", "sh",
+    "kernel", "kworker", "kthreadd", "kdevtmpfs", "rcu", "migration",
+    "ksoftirqd", "watchdog", "login", "getty", "agetty", "dbus",
+    "udevd", "rsyslogd", "networkd", "resolved", "accounts", "polkitd",
+    "snapd", "do-agent", "droplet-agent", "fwupd", "udisksd",
+    "ModemManager", "multipathd", "unattended-upgr", "pool-spawner",
+    "pool_workqueue", "jbd2", "kswapd", "kcompactd", "khugepaged",
+    "ksmd", "khungtaskd", "kauditd", "kdevtmpfs", "ecryptfs-kthread",
+    "scsi_eh", "irq", "cpuhp", "idle_inject", "oom_reaper", "psimon",
+    "sd-resolve", "sd-pam", "rs:main", "in:imklog", "in:imuxsock",
+    "cleanup", "gmain", "GUsbEventThread", "libusb_event",
+    "tokio-runtime-w", "tokio-rt-worker", "notify-rs",
+    "probing-thread", "zerotrie", "landscape-sysin", "run-parts", "50-landscape-sy",
+] 
+
+[monitors.network]
+enabled = true
+allowed_destinations = [
+    "api-fxtrade.oanda.com",
+    "stream-fxtrade.oanda.com",
+    "ntfy.sh",
+]
+alert_ports = [4444, 1337, 8080, 31337, 6666, 9999]
+
+[notifycore]
+bot_token = "your-actual-bot-token"
+chat_id = "8691529662"
+min_severity = "warning"
+
+[vpn]
+enabled = false
+default_security_level = "professional"
+auto_upgrade_threshold = 0.6
+
+[vpn.kill_switch]
+enabled = false
+tunnel_interface = "wg0"
+bypass_ips = []
+
+[[vpn.servers]]
+address = ""
+location = ""
+jurisdiction = ""
+trust_score = 0.0

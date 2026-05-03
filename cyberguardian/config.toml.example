@@ -1,0 +1,65 @@
+[agent]
+server_name = "tradeco-droplet"
+poll_interval_secs = 30
+
+[monitors.ssh]
+enabled = true
+auth_log_path = "/var/log/auth.log"
+fail_threshold = 5
+
+[monitors.filesystem]
+enabled = true
+watch_paths = [
+    "/root/TradeEco",
+    "/etc/cyberguardian",
+]
+ignore_extensions = ["log"]
+
+[monitors.process]
+enabled = true
+whitelist = [
+    "hq",
+    "cyberguardian",
+    "sshd",
+    "systemd",
+    "systemd-journal",
+    "journald",
+    "ntpd",
+    "cron",
+    "bash",
+    "sh",
+    "kernel",
+    "kworker",
+    "rcu",
+    "migration",
+    "ksoftirqd",
+    "watchdog",
+    "sshd",
+    "login",
+    "getty",
+    "agetty",
+    "dbus",
+    "udevd",
+    "rsyslogd",
+    "ntpd",
+    "chronyd",
+    "networkd",
+    "resolved",
+    "accounts",
+    "polkitd",
+    "snapd",
+    "do-agent",
+]
+
+[monitors.network]
+enabled = true
+allowed_destinations = [
+    "api-fxtrade.oanda.com",
+    "stream-fxtrade.oanda.com",
+    "ntfy.sh",
+]
+alert_ports = [4444, 1337, 8080, 31337, 6666, 9999]
+
+[notifycore]
+ntfy_url = "https://ntfy.sh/YOUR-TOPIC-HERE"
+min_severity = "warning"

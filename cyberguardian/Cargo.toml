@@ -1,0 +1,49 @@
+[package]
+name = "cyberguardian"
+version = "0.1.0"
+edition = "2021"
+authors = ["Cristion Gordon <gortech>"]
+description = "TerminalX CyberGuardian — server monitoring agent"
+
+[[bin]]
+name = "cyberguardian"
+path = "src/main.rs"
+
+[dependencies]
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+
+# Filesystem watching
+notify = { version = "6", features = ["serde"] }
+
+# HTTP client (ntfy.sh alerts)
+reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# Error handling
+anyhow = "1"
+thiserror = "1"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Date/time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Regex for log parsing
+regex = "1"
+
+# System info
+sysinfo = "0.30"
+
+[profile.release]
+opt-level = 3
+strip = true
