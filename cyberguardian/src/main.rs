@@ -59,15 +59,22 @@ async fn main() -> Result<()> {
 
     info!("Spawning monitors...");
 
-    // SSH monitor
-    let nc = Arc::clone(&notifycore);
-    let ssh_cfg = config.monitors.ssh.clone();
-    let sn = server_name.clone();
-    tokio::spawn(async move {
-        if let Err(e) = ssh::run(ssh_cfg, nc, sn).await {
-            tracing::error!("SSH monitor crashed: {}", e);
-        }
-    });
+   // SSH monitor
+let nc = Arc::clone(&notifycore);
+let ssh_cfg = config.monitors.ssh.clone();
+let sn = server_name.clone();
+let ar = Arc::new(tokio::sync::Mutex::new(
+    ActiveResponse::new(
+        config.active_response.clone(),
+        Arc::clone(&notifycore),
+        server_name.clone(),
+    )
+));
+tokio::spawn(async move {
+    if let Err(e) = ssh::run(ssh_cfg, nc, sn, ar).await {
+        tracing::error!("SSH monitor crashed: {}", e);
+    }
+});
 
     // Filesystem monitor
     let nc = Arc::clone(&notifycore);

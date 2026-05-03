@@ -31,7 +31,7 @@ whitelist = [
     "sd-resolve", "sd-pam", "rs:main", "in:imklog", "in:imuxsock",
     "cleanup", "gmain", "GUsbEventThread", "libusb_event",
     "tokio-runtime-w", "tokio-rt-worker", "notify-rs",
-    "probing-thread", "zerotrie", "landscape-sysin", "run-parts", "50-landscape-sy",
+    "probing-thread", "zerotrie", "landscape-sysin", "run-parts", "50-landscape-sy", "grep",
 ] 
 
 [monitors.network]
