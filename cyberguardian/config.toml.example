@@ -1,5 +1,5 @@
 [agent]
-server_name = "tradeco-droplet"
+server_name = "server-name-here"
 poll_interval_secs = 30
 
 [monitors.ssh]
@@ -10,45 +10,29 @@ fail_threshold = 5
 [monitors.filesystem]
 enabled = true
 watch_paths = [
-    "/root/TradeEco",
     "/etc/cyberguardian",
 ]
-ignore_extensions = ["log"]
+ignore_extensions = ["log", "tmp"]
 
 [monitors.process]
 enabled = true
 whitelist = [
-    "hq",
-    "cyberguardian",
-    "sshd",
-    "systemd",
-    "systemd-journal",
-    "journald",
-    "ntpd",
-    "cron",
-    "bash",
-    "sh",
-    "kernel",
-    "kworker",
-    "rcu",
-    "migration",
-    "ksoftirqd",
-    "watchdog",
-    "sshd",
-    "login",
-    "getty",
-    "agetty",
-    "dbus",
-    "udevd",
-    "rsyslogd",
-    "ntpd",
-    "chronyd",
-    "networkd",
-    "resolved",
-    "accounts",
-    "polkitd",
-    "snapd",
-    "do-agent",
+    "hq", "cyberguardian", "sshd", "systemd", "systemd-journal",
+    "journald", "journalctl", "ntpd", "chronyd", "cron", "bash", "sh",
+    "kernel", "kworker", "kthreadd", "kdevtmpfs", "rcu", "migration",
+    "ksoftirqd", "watchdog", "login", "getty", "agetty", "dbus",
+    "udevd", "rsyslogd", "networkd", "resolved", "accounts", "polkitd",
+    "snapd", "do-agent", "droplet-agent", "fwupd", "udisksd",
+    "ModemManager", "multipathd", "unattended-upgr", "pool-spawner",
+    "pool_workqueue", "jbd2", "kswapd", "kcompactd", "khugepaged",
+    "ksmd", "khungtaskd", "kauditd", "kdevtmpfs", "ecryptfs-kthread",
+    "scsi_eh", "irq", "cpuhp", "idle_inject", "oom_reaper", "psimon",
+    "sd-resolve", "sd-pam", "rs:main", "in:imklog", "in:imuxsock",
+    "cleanup", "gmain", "GUsbEventThread", "libusb_event",
+    "tokio-runtime-w", "tokio-rt-worker", "notify-rs", "fail2ban-server",
+    "f2b/observer", "probing-thread", "zerotrie", "landscape-sysin",
+    "run-parts", "50-landscape-sy", "grep", "tail", "cat", "ls", "ps",
+    "top", "htop", "cowrie", "twistd", "python3", "python",
 ]
 
 [monitors.network]
@@ -56,10 +40,46 @@ enabled = true
 allowed_destinations = [
     "api-fxtrade.oanda.com",
     "stream-fxtrade.oanda.com",
+    "api.telegram.org",
     "ntfy.sh",
 ]
 alert_ports = [4444, 1337, 8080, 31337, 6666, 9999]
 
+[monitors.integrity]
+enabled = true
+watch_paths = [
+    "/etc/cyberguardian",
+    "/usr/local/bin/cyberguardian",
+]
+ignore_extensions = ["log", "tmp"]
+poll_interval_secs = 60
+
 [notifycore]
-ntfy_url = "https://ntfy.sh/YOUR-TOPIC-HERE"
+bot_token = "YOUR_BOT_TOKEN_HERE"
+chat_id = "YOUR_CHAT_ID_HERE"
 min_severity = "warning"
+
+[vpn]
+enabled = true
+default_security_level = "professional"
+auto_upgrade_threshold = 0.6
+
+[vpn.kill_switch]
+enabled = true
+tunnel_interface = "wg0"
+bypass_ips = []
+
+[[vpn.servers]]
+address = ""
+location = ""
+jurisdiction = ""
+trust_score = 0.0
+
+[active_response]
+enabled = true
+auto_block_threshold = 0.80
+escalate_threshold = 1.00
+ip_whitelist = []
+known_abuse_asns = ["AS51396", "AS47890"]
+bulletproof_keywords = ["UNMANAGED", "bulletproof", "offshore"]
+evidence_log_path = "/var/log/cyberguardian/evidence.jsonl"

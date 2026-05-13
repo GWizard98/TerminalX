@@ -1,0 +1,17 @@
+[api]
+port = 7734
+bind = "127.0.0.1"
+
+[notifycore]
+bot_token = "8667300067:AAGwnBSYoa9j7Ts1JINRWj07bAfwPWsbjcQ"
+chat_id = "8691529662"
+
+[osint]
+scan_timeout_secs = 5
+
+[countermeasures]
+enabled = true
+auto_block = true
+block_asn_range = false
+protected_ports = [2266, 42098]
+vpn_interface = "wg0"

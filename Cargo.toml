@@ -1,48 +1,6 @@
-[package]
-name = "terminalx"
-version = "0.1.0"
-edition = "2021"
-authors = ["Cristion Gordon"]
-description = "GorTech TerminalX — Enterprise Cybersecurity Platform for ATM Operators"
-license = "MIT"
-repository = "https://github.com/GWizard98/TerminalX"
-keywords = ["cybersecurity", "atm-security", "threat-detection", "vpn", "penetration-testing"]
-categories = ["command-line-utilities", "network-programming"]
-
-[dependencies]
-anyhow = "1.0"
-chrono = { version = "0.4", features = ["serde"] }
-clap = { version = "4.5", features = ["derive"] }
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-tokio = { version = "1.0", features = ["full"] }
-reqwest = { version = "0.11", features = ["json", "blocking"] }
-axum = { version = "0.7" }
-tower = "0.4"
-tower-http = { version = "0.4", features = ["cors"] }
-uuid = { version = "1.0", features = ["v4", "serde"] }
-once_cell = "1.19"
-prometheus = "0.13"
-regex = "1.10"
-thiserror = "1.0"
-async-trait = "0.1"
-futures = "0.3"
-bytes = "1.5"
-base64 = "0.22"
-sha2 = "0.10"
-dirs = "5.0"
-fastrand = "2.0"
-csv = "1.3"
-ndarray = "0.16"
-linfa = { version = "0.8.0", features = ["default"] }
-linfa-clustering = "0.8.0"
-lettre = "0.11"
-sysinfo = { version = "0.30", default-features = false }
-
-[features]
-default = []
-cyberguardian = []
-cyberrecon = []
-full = ["cyberguardian", "cyberrecon"]
+[workspace]
+members = [
+    "cyberguardian",
+    "cyberrecon",
+]
+resolver = "2"

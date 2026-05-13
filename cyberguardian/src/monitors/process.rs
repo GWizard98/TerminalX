@@ -29,13 +29,14 @@ pub async fn run(config: ProcessMonitorConfig, notifycore: Arc<NotifyCore>, serv
     loop {
         sys.refresh_all();
 
-        let running: HashSet<String> = sys.processes().values()
-            .map(|p| p.name().to_string())
-            .collect();
+    let running: HashSet<String> = sys.processes().values()
+        .filter(|p| p.exe().is_some())
+        .map(|p| p.name().to_string())
+        .collect();
 
         for proc_name in &running {
             // Skip if whitelisted
-            let whitelisted = whitelist.iter().any(|w: &String| proc_name.contains(w.as_str()));
+           let whitelisted = whitelist.iter().any(|w: &String| proc_name.contains(w.as_str()));
             if whitelisted { continue; }
 
             // Already alerted on this one
@@ -53,7 +54,7 @@ pub async fn run(config: ProcessMonitorConfig, notifycore: Arc<NotifyCore>, serv
             notifycore.send(alert).await?;
         }
 
-        // Clean up processes that are no longer running from known_unknown
+        // Clean up processes that are no longer running
         known_unknown.retain(|p| running.contains(p));
 
         sleep(Duration::from_secs(poll_secs)).await;

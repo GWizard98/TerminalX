@@ -50,6 +50,7 @@ pub enum IncidentSource {
     Process,
     Network,
     Integrity,
+    Honeypot,
 }
 
 impl IncidentSource {
@@ -60,6 +61,7 @@ impl IncidentSource {
             IncidentSource::Process    => "process_monitor",
             IncidentSource::Network    => "network_monitor",
             IncidentSource::Integrity  => "integrity_monitor",
+            IncidentSource::Honeypot   => "honeypot_monitor",
         }
     }
 }

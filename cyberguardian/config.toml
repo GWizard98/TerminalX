@@ -18,20 +18,62 @@ ignore_extensions = ["log"]
 [monitors.process]
 enabled = true
 whitelist = [
-    "hq", "cyberguardian", "sshd", "systemd", "systemd-journal",
-    "journald", "journalctl", "ntpd", "chronyd", "cron", "bash", "sh",
-    "kernel", "kworker", "kthreadd", "kdevtmpfs", "rcu", "migration",
-    "ksoftirqd", "watchdog", "login", "getty", "agetty", "dbus",
-    "udevd", "rsyslogd", "networkd", "resolved", "accounts", "polkitd",
-    "snapd", "do-agent", "droplet-agent", "fwupd", "udisksd",
-    "ModemManager", "multipathd", "unattended-upgr", "pool-spawner",
-    "pool_workqueue", "jbd2", "kswapd", "kcompactd", "khugepaged",
-    "ksmd", "khungtaskd", "kauditd", "kdevtmpfs", "ecryptfs-kthread",
-    "scsi_eh", "irq", "cpuhp", "idle_inject", "oom_reaper", "psimon",
-    "sd-resolve", "sd-pam", "rs:main", "in:imklog", "in:imuxsock",
-    "cleanup", "gmain", "GUsbEventThread", "libusb_event",
-    "tokio-runtime-w", "tokio-rt-worker", "notify-rs",
-    "probing-thread", "zerotrie", "landscape-sysin", "run-parts", "50-landscape-sy", "grep",
+    "cyberguardian",
+    "sshd",
+    "systemd",
+    "systemd-journald",
+    "systemd-udevd",
+    "systemd-networkd",
+    "systemd-resolved",
+    "systemd-timesyncd",
+    "journald",
+    "cron",
+    "ntpd",
+    "rsyslogd",
+    "fail2ban",
+    "f2b/observer",
+    "python3",
+    "twistd",
+    "cowrie",
+    "wg",
+    "napi/wg0-0",
+    "droplet-agent",
+    "multipathd",
+    "polkitd",
+    "udisksd",
+    "ModemManager",
+    "systemctl",
+    "flask",
+    "gunicorn",
+    "agetty",
+    "login",
+    "bash",
+    "sh",
+    "ps",
+    "grep",
+    "tail",
+    "cat",
+    "journalctl",
+    "kworker",
+    "kthreadd",
+    "ksoftirqd",
+    "migration",
+    "rcu_sched",
+    "netfilter-persistent",
+    "dbus-daemon",
+    "unattended-upgrades",
+    "gmain",
+    "sd-resolve", 
+    "gdbus",
+    "unattended-upgr",
+    "(sd-pam)",
+    "pool-spawner",
+    "notify-rs inoti",
+    "tokio-rt-worker",
+    "cleanup",
+    "in:imklog",
+    "in:imuxsock",
+    "rs:main Q:Reg",
 ] 
 
 [monitors.network]
@@ -48,6 +90,10 @@ enabled = true
 watch_paths = ["/root/TradeEco"]
 ignore_extensions = ["log"]
 poll_interval_secs = 60
+
+[monitors.cowrie]
+enabled = true
+log_path = "/home/cowrie/cowrie/var/log/cowrie/cowrie.json"
 
 [notifycore]
 bot_token = "8667300067:AAGwnBSYoa9j7Ts1JINRWj07bAfwPWsbjcQ"

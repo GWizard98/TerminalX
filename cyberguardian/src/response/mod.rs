@@ -52,7 +52,6 @@ pub struct ActiveResponse {
     /// Track IPs currently being watched (score 0.60)
     watchlist: HashSet<String>,
 }
-
 impl ActiveResponse {
     pub fn new(
         config: ActiveResponseConfig,
@@ -366,8 +365,18 @@ impl ActiveResponse {
                 );
                 self.notifycore.send(alert).await?;
 
-                // TODO: send incident report to CyberRecon API when built
-                error!("response: ACTIVE INCIDENT — {} — {}", ip, reason);
+               
+                let _ = self.http_client
+                    .post("http://127.0.0.1:7734/escalate")
+                    .json(&serde_json::json!({
+                        "ip": ip,
+                        "description": reason,
+                        "evidence": reason,
+                        "source": "cyberguardian"
+                    }))
+                    .send()
+                    .await;
+                info!("response: escalated {} to CyberRecon", ip);
                 Ok(true)
             }
 

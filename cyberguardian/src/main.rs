@@ -11,7 +11,7 @@ use tracing::info;
 
 use cyberguardian::{
     config::Config,
-    monitors::{ssh, filesystem, process, network, integrity},
+    monitors::{ssh, filesystem, process, network, integrity, cowrie},
     notifycore::NotifyCore,
     response::ActiveResponse,
 };
@@ -59,22 +59,22 @@ async fn main() -> Result<()> {
 
     info!("Spawning monitors...");
 
-   // SSH monitor
-let nc = Arc::clone(&notifycore);
-let ssh_cfg = config.monitors.ssh.clone();
-let sn = server_name.clone();
-let ar = Arc::new(tokio::sync::Mutex::new(
-    ActiveResponse::new(
-        config.active_response.clone(),
-        Arc::clone(&notifycore),
-        server_name.clone(),
-    )
-));
-tokio::spawn(async move {
-    if let Err(e) = ssh::run(ssh_cfg, nc, sn, ar).await {
-        tracing::error!("SSH monitor crashed: {}", e);
-    }
-});
+    // SSH monitor
+    let nc = Arc::clone(&notifycore);
+    let ssh_cfg = config.monitors.ssh.clone();
+    let sn = server_name.clone();
+    let ar = Arc::new(tokio::sync::Mutex::new(
+        ActiveResponse::new(
+            config.active_response.clone(),
+            Arc::clone(&notifycore),
+            server_name.clone(),
+        )
+    ));
+    tokio::spawn(async move {
+        if let Err(e) = ssh::run(ssh_cfg, nc, sn, ar).await {
+            tracing::error!("SSH monitor crashed: {}", e);
+        }
+    });
 
     // Filesystem monitor
     let nc = Arc::clone(&notifycore);
@@ -116,9 +116,25 @@ tokio::spawn(async move {
         }
     });
 
+    // Cowrie honeypot monitor
+    let nc = Arc::clone(&notifycore);
+    let cowrie_cfg = config.monitors.cowrie.clone();
+    let sn = server_name.clone();
+    let ar = Arc::new(tokio::sync::Mutex::new(
+        ActiveResponse::new(
+            config.active_response.clone(),
+            Arc::clone(&notifycore),
+            server_name.clone(),
+        )
+    ));
+    tokio::spawn(async move {
+        if let Err(e) = cowrie::run(cowrie_cfg, nc, sn, ar).await {
+            tracing::error!("Cowrie monitor crashed: {}", e);
+        }
+    });
+
     info!("All monitors running. CyberGuardian is live.");
 
-    // Active Response engine
     let _active_response = ActiveResponse::new(
         config.active_response.clone(),
         Arc::clone(&notifycore),
